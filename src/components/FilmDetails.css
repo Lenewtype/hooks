@@ -1,0 +1,35 @@
+.filmDetails {
+	background-color: #f7f5ed;
+	border: 1px solid #564e42;
+	margin-top: 15px;
+	padding: 10px;
+}
+
+.filmDetails__teaser {
+	font-size: 13px;
+	font-style: italic;
+}
+
+.filmDetails__rating__option:before {
+	content: '✩';
+	cursor: pointer;
+	display: inline-block;
+	font-size: 25px;
+	vertical-align: -3px;
+}
+
+.filmDetails__rating__option--selected.filmDetails__rating__option:before {
+	content: '★';
+	color: Chocolate;
+	letter-spacing: 1px;
+	font-size: 20px;
+	vertical-align: -2px;
+}
+
+.filmDetails__rating__option:hover:before {
+	color: Chocolate;
+}
+
+.filmDetails__rating__option:first-of-type {
+	margin-left: 8px;
+}
