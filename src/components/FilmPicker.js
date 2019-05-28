@@ -7,10 +7,15 @@ import './FilmPicker.css';
 const FilmPicker = (props) => {
 	const [isLoading, fetchedData] = useHttp('https://swapi.co/api/films', []);
 
-  	const selectedFilms = fetchedData? fetchedData.results.slice(0, 7).map( (film, index) => {return {title: film.title, id: index+1}} ) : [];
+  	const selectedFilms = fetchedData? fetchedData.results.slice(0, 7).map( (film, index) => {
+
+      return {
+        title: film.title, 
+        id: film.url.replace(/\D/g, '')
+      }
+    }) : [];
   	
   	let content = (<p>Loading film options...</p>);
-
     if (
       !isLoading &&
       selectedFilms &&
@@ -18,8 +23,8 @@ const FilmPicker = (props) => {
     ) {
       content = (
         <select
-          onChange={props.onCharSelect}
-          value={props.selectedChar}
+          onChange={props.onFilmSelected}
+          value={props.selectedFilm}
           className={props.side}
         >
           {selectedFilms.map(film => (

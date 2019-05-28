@@ -29,6 +29,8 @@ const Film = props => {
 		return (
 			<FilmDetails
 				{...loadedFilm}
+				rating={props.rating}
+          		onRatingChange={props.onRatingChange}
 			/>
 		);
 	}

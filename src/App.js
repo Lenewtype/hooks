@@ -12,7 +12,7 @@ const App = props => {
   const [selectedCharacter, setSelectedCharacter] = useState(1);
   const [selectedFilm, setSelectedFilm] = useState(1);
   const [destroyed, setDestroyed] = useState(false);
-
+  const [ratings, setRating] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0});  
 
 
   const sideHandler = side => {
@@ -28,6 +28,15 @@ const App = props => {
     const filmId = event.target.value;
     setSelectedFilm(filmId);
   };
+
+  const onRatingChange = (rating) => {
+    //clone the rating map
+    let newRatingMap = Object.assign({}, ratings);
+    //check to see if the rating selected matches the stored rating
+    //if so, set rating to 0, essentially "unrating" this film
+    newRatingMap[selectedFilm] = newRatingMap[selectedFilm] === rating? 0 : rating;
+    setRating(newRatingMap);
+  }
 
   const destructionHandler = () => {
     setDestroyed(true);
@@ -59,7 +68,11 @@ const App = props => {
           selectedFilm={selectedFilm}
           onFilmSelected={filmSelectHandler}
         />
-        <Film selectedFilm={selectedFilm}/>
+        <Film 
+          selectedFilm={selectedFilm}
+          rating={ratings[selectedFilm]}
+          onRatingChange={onRatingChange}
+        />
       </React.Fragment>
     );
 
